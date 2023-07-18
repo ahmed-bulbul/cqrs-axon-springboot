@@ -3,14 +3,17 @@ package com.axon.cqrs.controller;
 
 import com.axon.cqrs.entity.Employee;
 import com.axon.cqrs.query.GetAllEmployeeQuery;
+import com.axon.cqrs.query.GetEmployeeByIdQuery;
 import org.axonframework.messaging.responsetypes.ResponseTypes;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/employees")
@@ -26,6 +29,15 @@ public class EmployeeQueryController {
         GetAllEmployeeQuery getAllEmpQuery = new GetAllEmployeeQuery();
 
         return queryGateway.query(getAllEmpQuery, ResponseTypes.multipleInstancesOf(Employee.class)).join();
+    }
+
+    @GetMapping("/{id}")
+    public Employee getEmployeeById(@PathVariable(value = "id")UUID id) {
+
+        GetEmployeeByIdQuery getAllEmpQuery = new GetEmployeeByIdQuery();
+        getAllEmpQuery.setId(id);
+
+        return queryGateway.query(getAllEmpQuery, ResponseTypes.instanceOf(Employee.class)).join();
     }
 
 }
