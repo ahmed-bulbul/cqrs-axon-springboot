@@ -31,6 +31,7 @@ public class ProductProjections {
                 products.stream()
                         .map(product -> ProductRestModel
                                 .builder()
+                                .id(product.getProductId())
                                 .quantity(product.getQuantity())
                                 .price(product.getPrice())
                                 .name(product.getName())
@@ -47,11 +48,11 @@ public class ProductProjections {
             Product product = productOptional.get();
 
             return ProductRestModel.builder()
+                    .id(product.getProductId())
                     .quantity(product.getQuantity())
                     .price(product.getPrice())
                     .name(product.getName())
                     .build();
-
         }
 
         return null;
