@@ -5,10 +5,12 @@ import com.axon.cqrs.ecommerce.command.api.data.Product;
 import com.axon.cqrs.ecommerce.command.api.data.ProductRepository;
 import com.axon.cqrs.ecommerce.command.api.model.ProductRestModel;
 import com.axon.cqrs.ecommerce.query.api.queries.GetProductsQuery;
+import com.axon.cqrs.ecommerce.query.api.queries.GetProductsQueryById;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ProductProjections {
@@ -36,5 +38,22 @@ public class ProductProjections {
                         .toList();
 
         return productRestModels;
+    }
+
+    @QueryHandler
+    public ProductRestModel handle(GetProductsQueryById getProductsQueryById){
+        Optional<Product> productOptional = productRepository.findById(getProductsQueryById.getId());
+        if(productOptional.isPresent()){
+            Product product = productOptional.get();
+
+            return ProductRestModel.builder()
+                    .quantity(product.getQuantity())
+                    .price(product.getPrice())
+                    .name(product.getName())
+                    .build();
+
+        }
+
+        return null;
     }
 }
