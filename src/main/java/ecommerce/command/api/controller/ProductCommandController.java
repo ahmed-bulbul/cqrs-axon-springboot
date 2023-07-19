@@ -1,7 +1,7 @@
-package dailycodebuffer.command.api.controller;
+package ecommerce.command.api.controller;
 
-import dailycodebuffer.command.api.commands.CreateProductCommand;
-import dailycodebuffer.command.api.model.ProductRestModel;
+import ecommerce.command.api.commands.CreateProductCommand;
+import ecommerce.command.api.model.ProductRestModel;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
