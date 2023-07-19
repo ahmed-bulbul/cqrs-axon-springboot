@@ -8,3 +8,12 @@
 ![image](https://github.com/ahmed-bulbul/cqrs-axon-springboot/assets/70557643/8e9b3578-da1f-433b-a525-2cb0c52c0809)
 
 
+
+
+
+################## Practice ############################
+Architecture: 
+![img_1.png](img_1.png) </br>
+![img.png](img.png)
+
+
